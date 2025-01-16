@@ -3,18 +3,18 @@ import Header from "@/components/layout/Header";
 import { UserProps } from "@/interfaces";
 
 interface UsersPageProps {
-  posts: UserProps[];
+  users: UserProps[];
 }
 
-const Users: React.FC<UsersPageProps> = ({ posts }) => {
+const Users: React.FC<UsersPageProps> = ({ users }) => {
   return (
     <div className="flex flex-col h-screen">
       <Header />
       <main className="p-8">
         <h1 className="text-3xl font-semibold mb-6">Users</h1>
         <div className="grid grid-cols-3 gap-6">
-          {/* Map over posts to render UserCard components */}
-          {posts.map((user) => (
+          {/* Map over users to render UserCard components */}
+          {users.map((user) => (
             <UserCard key={user.id} {...user} />
           ))}
         </div>
@@ -25,11 +25,11 @@ const Users: React.FC<UsersPageProps> = ({ posts }) => {
 
 export async function getStaticProps() {
   const response = await fetch("https://jsonplaceholder.typicode.com/users");
-  const posts = await response.json();
+  const users = await response.json();
 
   return {
     props: {
-      posts, // Pass fetched data as props
+      users,
     },
   };
 }
